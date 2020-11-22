@@ -1,0 +1,18 @@
+PUT : localhost:8989/api/update
+
+{
+    "userId": 2,
+    "firstName": "Tariq",
+    "middleName": "",
+    "lastName": "Ahsan",
+    "phone": "(630)728-2091",
+    "email": "tariq.ahsan.civ@mail.mil",
+    "address": {
+        "addressId": 2,
+        "street1": "42766 Locklear Terrace",
+        "street2": "",
+        "city": "Chantilly",
+        "state": "VA",
+        "zip5": "20152",
+        "zip4": "9999"
+    }

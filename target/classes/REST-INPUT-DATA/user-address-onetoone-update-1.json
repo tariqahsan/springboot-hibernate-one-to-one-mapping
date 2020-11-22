@@ -1,0 +1,19 @@
+PUT : localhost:8989/api/update
+
+{
+	"userId":1,
+	"firstName": "Tausif",
+	"middleName": "R",
+	"lastName": "Ahsan",
+	"phone": "(571)999-9999",
+	"email": "tausifrahsan@yahoo.com",
+	"address": {
+            "addressId":1,
+            "street1": "7185 Shady Palm Dr.",
+            "street2": "",
+            "city": "Springfield",
+            "state": "VA",
+            "zip5": "22153",
+            "zip4": "1234"
+    }
+}
