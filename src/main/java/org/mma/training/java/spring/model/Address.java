@@ -46,6 +46,7 @@ public class Address {
 	
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "address")
 	@JsonBackReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private User user;
 	
 //	@OneToOne(fetch = FetchType.LAZY)
