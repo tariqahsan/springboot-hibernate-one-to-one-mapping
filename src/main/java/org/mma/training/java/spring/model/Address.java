@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "ADDRESS")
@@ -46,6 +47,7 @@ public class Address {
 	
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "address")
 	@JsonBackReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private User user;
 	
 //	@OneToOne(fetch = FetchType.LAZY)

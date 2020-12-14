@@ -21,8 +21,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api")
+@Api(value = "API to search User from a User Repository by different search parameters",
+description = "This API provides the capability to search User from a User Repository", produces = "application/json")
 public class UserController {
 	
 	private final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -30,6 +35,7 @@ public class UserController {
 	@Autowired
 	UserRepository userRepository;
 	
+	@ApiOperation(value = "Get All Users", produces = "application/json")
 	@GetMapping("/users")
 	public ResponseEntity<List<User>> getAllUsers() {
 		List<User> users = new ArrayList<>();

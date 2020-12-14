@@ -14,8 +14,14 @@
 	<name>springboot-hibernate-one-to-one-mapping</name>
 	<description>Example of Spring Boot, Hibernate One To One Mapping and MySQL DB
 	</description>
+	
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<swagger.version>3.0.0</swagger.version>
+		<application.version>1.0.0</application.version>
+		<release.number>SNAPSHOT</release.number>
 	</properties>
 
 	<dependencies>
@@ -53,6 +59,17 @@
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.9.4</version>
+		</dependency>
+		<!-- swagger dependencies -->
+		<dependency>
+		   <groupId>io.springfox</groupId>
+		   <artifactId>springfox-boot-starter</artifactId>
+		   <version>${swagger.version}</version>
+		</dependency>
+		<dependency>
+		   <groupId>io.springfox</groupId>
+		   <artifactId>springfox-swagger-ui</artifactId>
+		   <version>${swagger.version}</version>
 		</dependency>
 
 	</dependencies>

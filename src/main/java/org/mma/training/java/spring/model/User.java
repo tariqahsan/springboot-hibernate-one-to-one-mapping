@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -52,6 +53,7 @@ public class User {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@MapsId
 	@JsonManagedReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name = "id")
     //@JoinColumn(name = "address_id", referencedColumnName = "address_id", insertable = false, updatable = false)
     private Address address;
