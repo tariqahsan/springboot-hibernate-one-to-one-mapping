@@ -42,24 +42,13 @@ public class User {
 	@Column(name = "EMAIL_ADDRESS")
 	private String email;
 	
-//	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	@JoinColumn(name = "ADDRESS_ID")
-//	private Address address;
-	
-//	@OneToOne(fetch = FetchType.LAZY)
-//	@MapsId
-//	private Address address;
-	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@MapsId
 	@JsonManagedReference
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name = "id")
-    //@JoinColumn(name = "address_id", referencedColumnName = "address_id", insertable = false, updatable = false)
-    private Address address;
-	
-//	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user", optional = false)
-//	private Address address;
+    	//@JoinColumn(name = "address_id", referencedColumnName = "address_id", insertable = false, updatable = false)
+    	private Address address;
 	
 	public User() {}
 
