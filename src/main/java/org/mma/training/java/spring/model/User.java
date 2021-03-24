@@ -17,6 +17,8 @@ import org.hibernate.annotations.GenericGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+// User Entity Class
+
 @Entity
 @Table(name = "USERS")
 public class User {
