@@ -29,12 +29,35 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "API to search User from a User Repository by different search parameters",
 description = "This API provides the capability to search User from a User Repository", produces = "application/json")
 public class UserController {
-	
+
 	private final Logger logger = LoggerFactory.getLogger(UserController.class);
-	
+
 	@Autowired
 	UserRepository userRepository;
-	
+
+	@ApiOperation(value = "Get a User by ID", produces = "application/json")
+	@GetMapping("/users/{id}")
+	public ResponseEntity<User> getUsersById(@PathVariable("id") long id) {
+		Optional<User> usersData = userRepository.findById(id);
+
+		if (usersData.isPresent()) {
+			return new ResponseEntity<>(usersData.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
+		System.out.println("Deleting id -> " + id);
+		try {
+			userRepository.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		}
+	}
+
 	@ApiOperation(value = "Get All Users", produces = "application/json")
 	@GetMapping("/users")
 	public ResponseEntity<List<User>> getAllUsers() {
@@ -49,21 +72,10 @@ public class UserController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@GetMapping("/users/{id}")
-	public ResponseEntity<User> getUsersById(@PathVariable("id") long id) {
-		Optional<User> usersData = userRepository.findById(id);
 
-		if (usersData.isPresent()) {
-			return new ResponseEntity<>(usersData.get(), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-    
-    @PostMapping(value = "/add")
+	@PostMapping(value = "/add")
 	public ResponseEntity<User> postUser(@RequestBody User user) {
-    	
+
 		try {
 			User userData = userRepository.save(user);
 			return new ResponseEntity<>(userData, HttpStatus.CREATED);
@@ -71,46 +83,35 @@ public class UserController {
 			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
 		}
 	}
-    
-    @PutMapping("/update")
-    public ResponseEntity<User> updateUserById(@RequestBody User userData) {
-    	try {
-    		User user = new User();
-    		BeanUtils.copyProperties(userData, user);
-    		System.out.println(user.getUserId());
-    		System.out.println(user.getFirstName());
-    		System.out.println(user.getLastName());
-    		System.out.println(user.getPhone());
-    		System.out.println(user.getEmail());
-    		System.out.println(user.getAddress().getAddressId());
-    		System.out.println(user.getAddress().getCity());
-    		userRepository.save(user);
-    		return new ResponseEntity<User>(user, HttpStatus.OK);
-    	} catch (Exception e) {
-    		return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-    	}
-    }
-    
-    @DeleteMapping("/delete/{id}")
-	public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
-    	System.out.println("Deleting id -> " + id);
+
+	@PutMapping("/update")
+	public ResponseEntity<User> updateUserById(@RequestBody User userData) {
 		try {
-			userRepository.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			User user = new User();
+			BeanUtils.copyProperties(userData, user);
+			System.out.println(user.getUserId());
+			System.out.println(user.getFirstName());
+			System.out.println(user.getLastName());
+			System.out.println(user.getPhone());
+			System.out.println(user.getEmail());
+			System.out.println(user.getAddress().getAddressId());
+			System.out.println(user.getAddress().getCity());
+			userRepository.save(user);
+			return new ResponseEntity<User>(user, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
 		}
 	}
-    
-    @DeleteMapping("/delete-all")
-	public ResponseEntity<HttpStatus> deleteAllUsers() {
-    	System.out.println("Deleting all users");
-		try {
-			userRepository.deleteAll();
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-		}
-	}
+
+	//    @DeleteMapping("/delete-all")
+	//	public ResponseEntity<HttpStatus> deleteAllUsers() {
+	//    	System.out.println("Deleting all users");
+	//		try {
+	//			userRepository.deleteAll();
+	//			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	//		} catch (Exception e) {
+	//			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+	//		}
+	//	}
 
 }

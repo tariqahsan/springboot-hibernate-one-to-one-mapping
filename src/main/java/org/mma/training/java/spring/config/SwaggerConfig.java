@@ -19,7 +19,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("org.mma.training.java.spring"))
-                .paths(PathSelectors.ant("/api/*"))
+                .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiDetails());
                 
